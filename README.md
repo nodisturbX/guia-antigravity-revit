@@ -65,7 +65,7 @@ Si se experimentan problemas de comunicación o el agente no logra detectar el e
 
 ```powershell
 pyrevit --version
-
+```
 
 * **Resultado exitoso:** Muestra el número de versión instalado, confirmando que las variables de entorno de Windows están configuradas correctamente.
 
