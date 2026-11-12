@@ -45,3 +45,17 @@ La gran ventaja de pyRevit es que no duplicamos código para cada versión de Re
 2. Registra tu carpeta local en pyRevit ejecutando el siguiente comando:
    ```powershell
    pyrevit extensions extend ui BIMDataLab C:\BIMDataLab
+
+---
+
+## ⚡ Sección 3: Conexión Inicial y Primeras Consultas con Antigravity
+
+Antes de diseñar botones o pestañas personalizadas en la interfaz de Revit, es fundamental entender cómo la Inteligencia Artificial se comunica con el software BIM a nivel de código y consultas rápidas.
+
+### 1. ¿Cómo interactúa el Agente con Revit?
+* **El entorno local:** Antigravity IDE analiza nuestro espacio de trabajo y comprende la estructura de la API de Revit (Clases, Elementos, Parámetros).
+* **Sin botones innecesarios al inicio:** En esta fase exploratoria, utilizamos las herramientas de ejecución de scripts de pyRevit para probar comandos directamente, comprobando que la IA comprende las reglas del entorno BIM antes de automatizarlas de forma permanente.
+
+### 2. Pruebas de Concepto Iniciales (Lo que veremos en el taller)
+* **Consulta de Muros:** Cómo pedirle al agente que filtre y cuente los tipos de muros presentes en el modelo activo.
+* **Creación de Niveles:** Cómo estructurar un comando base para generar niveles automáticos a partir de parámetros definidos por código.
