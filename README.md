@@ -48,14 +48,24 @@ La gran ventaja de pyRevit es que no duplicamos código para cada versión de Re
 
 ---
 
-## ⚡ Sección 3: Conexión Inicial y Primeras Consultas con Antigravity
+## ⚡ Sección 3: Conexión Activa y Primeras Consultas con Antigravity y Revit
 
-Antes de diseñar botones o pestañas personalizadas en la interfaz de Revit, es fundamental entender cómo la Inteligencia Artificial se comunica con el software BIM a nivel de código y consultas rápidas.
+En esta sección pasamos de la teoría a la interacción en vivo entre el Agente de IA y nuestro entorno BIM.
 
-### 1. ¿Cómo interactúa el Agente con Revit?
-* **El entorno local:** Antigravity IDE analiza nuestro espacio de trabajo y comprende la estructura de la API de Revit (Clases, Elementos, Parámetros).
-* **Sin botones innecesarios al inicio:** En esta fase exploratoria, utilizamos las herramientas de ejecución de scripts de pyRevit para probar comandos directamente, comprobando que la IA comprende las reglas del entorno BIM antes de automatizarlas de forma permanente.
+### 1. ¿Cómo se comunica Antigravity con Revit?
+A diferencia de otros entornos complejos que requieren servidores o conectores pesados, Antigravity aprovecha el motor global de **pyRevit CLI** instalado en el sistema operativo. Esto le permite al agente consultar procesos activos en la memoria RAM (como verificar qué modelos `.rvt` están abiertos y qué versión de Revit se está ejecutando) sin necesidad de abrir interfaces gráficas pesadas.
 
-### 2. Pruebas de Concepto Iniciales (Lo que veremos en el taller)
-* **Consulta de Muros:** Cómo pedirle al agente que filtre y cuente los tipos de muros presentes en el modelo activo.
-* **Creación de Niveles:** Cómo estructurar un comando base para generar niveles automáticos a partir de parámetros definidos por código.
+### 2. El Primer Contacto y Autorización de Seguridad (Permisos en el IDE)
+Cuando le pidas al agente que verifique el modelo abierto por primera vez (por ejemplo, preguntándole *"¿Qué modelo de Revit tengo abierto?"*):
+* **El aviso en el IDE:** El Agente solicitará permiso mediante una ventana emergente para ejecutar el comando global de diagnóstico (`pyrevit revits`).
+* **Buena práctica:** Selecciona *"Allow this time"* o *"Always allow"* para autorizar la ejecución. Esto garantiza la seguridad del entorno local mediante el control explícito de accesos.
+
+### 3. Diagnóstico de Instalación (Resolución de Errores Comunes)
+Si se experimentan problemas de comunicación o el agente no logra detectar el entorno activo, el primer paso de autodiagnóstico en la terminal de PowerShell es verificar el motor de comandos:
+
+```powershell
+pyrevit --version
+
+* **Resultado exitoso:** Muestra el número de versión instalado, confirmando que las variables de entorno de Windows están configuradas correctamente.
+
+* **Si falla ("Comando no reconocido"):** Se debe cerrar Revit y PowerShell, y volver a ejecutar el instalador de pyRevit marcando obligatoriamente la opción "Install for all users" para registrar de forma global el CLI en el sistema.
