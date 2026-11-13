@@ -72,4 +72,40 @@ La gran ventaja de pyRevit es que no duplicamos código para cada versión de Re
    ```powershell
    pyrevit extensions extend ui BIMDataLab C:\BIMDataLab
    ```
+
+### 3. Promt creación boton taller
+
+Copia el siguiente texto y pégalo directamente en el chat de Antigravity IDE:
+
+```text
+Actúa como un desarrollador senior especialista en pyRevit y la API de Autodesk Revit (compatible con Revit 2026 .NET Framework y Revit 2027 .NET 8).
+
+Edita directamente los archivos existentes (`bundle.yaml` y `script.py`) ubicados en la siguiente ruta de este espacio de trabajo:
+`AutomationIA.tab\Taller.panel\PrimerBoton.pushbutton\`
+
+1. En `bundle.yaml`, configura el título del botón como "Vistas 3D\npor Nivel" y añade una descripción clara en español sobre la generación automática de vistas 3D recortadas según el parámetro de proyecto.
+
+2. En `script.py`, programa la siguiente lógica sobre el documento activo (`__revit__.ActiveUIDocument.Document`) dentro de una transacción segura (`Transaction`):
+
+   a) **Lectura de elementos por parámetro de proyecto:**
+      - Recolecta todos los ejemplares físicos del modelo (`WhereElementIsNotElementType()`).
+      - Filtra aquellos elementos que tengan el parámetro de proyecto `"BMDTLB_NIVEL DE ELEMENTO"` con un valor de texto válido (no vacío ni nulo).
+      - Agrupa los elementos en un diccionario donde la clave sea el valor limpio de `"BMDTLB_NIVEL DE ELEMENTO"` (ej. `Nivel 01`, `Nivel 02`, etc.).
+
+   b) **Cálculo del BoundingBox con margen de 50 cm:**
+      - Para cada grupo/nivel, obtén el `BoundingBoxXYZ` (`get_BoundingBox(None)`) de cada elemento y calcula las coordenadas extremas globales (`Min.X, Min.Y, Min.Z` y `Max.X, Max.Y, Max.Z`) que envuelven a todos los elementos de ese nivel.
+      - Aplica un margen de expansión (offset) de **50 cm** (`0.50 / 0.3048` pies internos de Revit) en todas las direcciones (especialmente en Z superior e inferior) al `BoundingBoxXYZ` resultante.
+
+   c) **Creación de Vistas 3D Isométricas con Section Box:**
+      - Busca el `ViewFamilyType` correspondiente a `ViewFamily.ThreeDimensional`.
+      - Para cada nivel encontrado, crea una vista 3D isométrica (`View3D.CreateIsometric(doc, view_family_type_id)`).
+      - Asígnale el nombre `"3D_" + nombre_nivel` (si ya existe una vista con ese nombre en el proyecto, omítela o actualízale su Section Box sin lanzar error).
+      - Activa y asigna el `BoundingBoxXYZ` calculado mediante `vista_3d.SetSectionBox(bbox_expandido)`.
+
+   d) **Compatibilidad y reporte final:**
+      - Usa un helper compatible con IDs de 64 bits (`id.Value` si existe, sino `id.IntegerValue`) para Revit 2026/2027.
+      - Al finalizar la transacción, muestra una ventana limpia usando `pyrevit.forms.alert` indicando cuántas vistas 3D se crearon o actualizaron y el listado de niveles procesados.
+```
+
+
 ---
