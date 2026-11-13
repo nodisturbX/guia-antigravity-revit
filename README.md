@@ -24,7 +24,7 @@ Antes de escribir código o configurar conexiones, es vital entender qué papel 
    * **Plataforma y Accesos:** [Portal de Google Antigravity](https://antigravity.google) *(o tu entorno de desarrollo integrado configurado)*.
 ---
 
-## ⚡ Sección 3: Conexión Activa y Primeras Consultas con Antigravity y Revit
+## ⚡ Sección 2: Conexión Activa y Primeras Consultas con Antigravity y Revit
 
 En esta sección pasamos de la teoría a la interacción en vivo entre el Agente de IA y nuestro entorno BIM.
 
