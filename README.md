@@ -24,30 +24,6 @@ Antes de escribir código o configurar conexiones, es vital entender qué papel 
    * **Plataforma y Accesos:** [Portal de Google Antigravity](https://antigravity.google) *(o tu entorno de desarrollo integrado configurado)*.
 ---
 
-## 🛠️ Sección 2: Preparando el Entorno y Estructura de Carpetas
-
-Para que pyRevit reconozca nuestras herramientas de IA y las cargue tanto en Revit 2026 como en Revit 2027, debemos estructurar una carpeta de desarrollo local en nuestra computadora.
-
-### 1. ¿Cómo se organiza una extensión en pyRevit?
-pyRevit lee una jerarquía de carpetas estricta basada en sufijos obligatorios. En la raíz de tu proyecto de trabajo (por ejemplo, en `C:\BIMDataLab\`), debes crear la siguiente estructura:
-
-* **`BIMDataLab.extension`** (La carpeta principal con el sufijo `.extension`)
-  * **`AutomatizacionIA.tab`** (La pestaña que aparecerá en la cinta de Revit, con sufijo `.tab`)
-    * **`AuditoriasBIM.panel`** (El panel dentro de la pestaña, con sufijo `.panel`)
-      * **`AuditarMuros.pushbutton`** (El botón físico que ejecutará el script, con sufijo `.pushbutton`)
-        * `script.py` (El código en Python que interactúa con la API de Revit)
-        * `bundle.yaml` (El archivo de configuración del botón)
-
-### 2. Vinculando la extensión para Revit 2026 y Revit 2027
-La gran ventaja de pyRevit es que no duplicamos código para cada versión de Revit. Podemos apuntar ambas versiones a una misma carpeta de desarrollo:
-
-1. Abre tu terminal de PowerShell.
-2. Registra tu carpeta local en pyRevit ejecutando el siguiente comando:
-   ```powershell
-   pyrevit extensions extend ui BIMDataLab C:\BIMDataLab
-
----
-
 ## ⚡ Sección 3: Conexión Activa y Primeras Consultas con Antigravity y Revit
 
 En esta sección pasamos de la teoría a la interacción en vivo entre el Agente de IA y nuestro entorno BIM.
@@ -70,3 +46,28 @@ pyrevit --version
 * **Resultado exitoso:** Muestra el número de versión instalado, confirmando que las variables de entorno de Windows están configuradas correctamente.
 
 * **Si falla ("Comando no reconocido"):** Se debe cerrar Revit y PowerShell, y volver a ejecutar el instalador de pyRevit marcando obligatoriamente la opción "Install for all users" para registrar de forma global el CLI en el sistema.
+
+---
+## 🛠️ Sección 3: Despliegue de Herramientas y Botones Personalizados
+
+Para que pyRevit reconozca nuestras herramientas de IA y las cargue tanto en Revit 2026 como en Revit 2027, debemos estructurar una carpeta de desarrollo local en nuestra computadora.
+
+### 1. ¿Cómo se organiza una extensión en pyRevit?
+pyRevit lee una jerarquía de carpetas estricta basada en sufijos obligatorios. En la raíz de tu proyecto de trabajo (por ejemplo, en `C:\BIMDataLab\`), debes crear la siguiente estructura:
+
+* **`BIMDataLab.extension`** (La carpeta principal con el sufijo `.extension`)
+  * **`AutomatizacionIA.tab`** (La pestaña que aparecerá en la cinta de Revit, con sufijo `.tab`)
+    * **`AuditoriasBIM.panel`** (El panel dentro de la pestaña, con sufijo `.panel`)
+      * **`AuditarMuros.pushbutton`** (El botón físico que ejecutará el script, con sufijo `.pushbutton`)
+        * `script.py` (El código en Python que interactúa con la API de Revit)
+        * `bundle.yaml` (El archivo de configuración del botón)
+
+### 2. Vinculando la extensión para Revit 2026 y Revit 2027
+La gran ventaja de pyRevit es que no duplicamos código para cada versión de Revit. Podemos apuntar ambas versiones a una misma carpeta de desarrollo:
+
+1. Abre tu terminal de PowerShell.
+2. Registra tu carpeta local en pyRevit ejecutando el siguiente comando:
+   ```powershell
+   pyrevit extensions extend ui BIMDataLab C:\BIMDataLab
+   ```
+---
