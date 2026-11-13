@@ -62,6 +62,8 @@ pyRevit lee una jerarquía de carpetas estricta basada en sufijos obligatorios. 
         * `script.py` (El código en Python que interactúa con la API de Revit)
         * `bundle.yaml` (El archivo de configuración del botón)
 
+Sino deseas dejarlo fuera de la carpeta de extension de pyrevit lo que puedes hacer es colocar esa carpeta .extension en esta ruta `%APPDATA%\pyRevit\Extensions`
+
 ### 2. Vinculando la extensión para Revit 2026 y Revit 2027
 La gran ventaja de pyRevit es que no duplicamos código para cada versión de Revit. Podemos apuntar ambas versiones a una misma carpeta de desarrollo:
 
